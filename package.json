@@ -20,8 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:run": "npm run typeorm migration:run -- -d ./src/orm.configuration.ts",
-    "migration:create": "npm run typeorm migration:create asdasd",
-    "migration:generate": "typeorm-ts-node-commonjs migration:generate ${NAME} -d ./src/orm.configuration.ts"
+    "migration:create": "npm run typeorm migration:create ./data/migrations/${name}",
+    "migration:generate": "typeorm-ts-node-commonjs migration:generate ./data/migrations/${name} -d ./src/orm.configuration.ts"
   },
   "dependencies": {
     "@firebase/auth": "^1.8.1",

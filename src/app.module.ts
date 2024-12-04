@@ -3,20 +3,19 @@ import { IamModule } from './modules/iam/iam.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { datasourceOptions } from './orm.configuration';
 
 @Module({
   imports: [
     IamModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      autoLoadEntities: true,
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        ...datasourceOptions,
+      }),
+      dataSourceFactory: async (options) => {
+        return new DataSource(options).initialize();
+      },
     }),
   ],
   controllers: [],

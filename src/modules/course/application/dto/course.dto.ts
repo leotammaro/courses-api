@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 export enum COURSE {
@@ -12,16 +13,19 @@ export enum COURSE {
 export const coursesValues = Object.values(COURSE);
 
 export class CourseDto {
+  @ApiProperty()
   @IsEnum(COURSE)
   @IsString()
   desiredCourse: string;
 }
 
 export class CoursesDto {
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   userId: string;
 
+  @ApiProperty()
   @IsArray()
   courses: CourseDto[];
 }

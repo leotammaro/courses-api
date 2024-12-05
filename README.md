@@ -25,3 +25,9 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Swagger
+
+To view the documentation, check the `/api` endpoint.
+
+It describes the different routes and examples of responses.

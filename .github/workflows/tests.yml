@@ -34,8 +34,6 @@ jobs:
           MYSQL_DATABASE: ${{secrets.DB_NAME}}
         ports:
           - 3306:3306
-        volumes:
-          - ./data/mysql/:/var/lib/mysql
 
     strategy:
       matrix:

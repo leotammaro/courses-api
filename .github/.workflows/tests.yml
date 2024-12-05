@@ -4,6 +4,9 @@ on:
   pull_request:
     branches: ['*']
 
+  push:
+    branches: ['*']
+
   env:
     DB_PASSWORD: ${{secrets.DB_PASSWORD}}
     DB_NAME: ${{secrets.DB_NAME}}

@@ -107,7 +107,3 @@ $ npm run test:cov
 To view the documentation, check the `/api` endpoint.
 
 It describes the different routes and examples of responses.
-
-```
-
-```

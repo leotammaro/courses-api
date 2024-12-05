@@ -1,5 +1,5 @@
 import { Module, Provider } from '@nestjs/common';
-import { AuthController } from './auth/auth.controller';
+import { AuthController } from './auth/interface/auth.controller';
 import { AuthService } from './auth/application/service/auth.service';
 import {
   EXTERNAL_AUTH_SERVICE,

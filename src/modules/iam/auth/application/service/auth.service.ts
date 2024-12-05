@@ -8,7 +8,7 @@ import {
   EXTERNAL_AUTH_SERVICE,
   IAuthExternalProvider,
 } from './firebase.service';
-import { UserService } from 'src/modules/iam/user/application/service/user.service';
+import { UserService } from '../../../user/application/service/user.service';
 import { UserDto } from 'src/modules/iam/user/application/dto/user.dto';
 
 @Injectable()
@@ -30,6 +30,15 @@ export class AuthService {
       await this.userService.create(userData);
 
       return signUpResult;
+    } catch (error) {
+      console.error(error.message);
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+
+  async signIn(authDto: AuthDto) {
+    try {
+      return await this.authService.signIn(authDto);
     } catch (error) {
       console.error(error.message);
       throw new InternalServerErrorException(error.message);

@@ -1,7 +1,9 @@
 import {
+  Auth,
   createUserWithEmailAndPassword,
   getAuth,
   sendEmailVerification,
+  signInWithEmailAndPassword,
 } from '@firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { AuthDto } from '../dto/auth.dto';
@@ -10,9 +12,14 @@ export interface IAuthExternalProvider {
   signUp(
     authDto: AuthDto,
   ): Promise<{ accessToken: string; externalId: string }>;
+
+  signIn(
+    authDto: AuthDto,
+  ): Promise<{ accessToken: string; refreshToken: string; externalId: string }>;
 }
 
 export class FireBaseAuthService implements IAuthExternalProvider {
+  auth: Auth;
   constructor() {
     initializeApp({
       apiKey: process.env.FIREBASE_API_KEY,
@@ -23,24 +30,45 @@ export class FireBaseAuthService implements IAuthExternalProvider {
       appId: process.env.FIREBASE_APP_ID,
       measurementId: process.env.FIREBASE_MEASUREMENT_ID,
     });
+    this.auth = getAuth();
   }
 
   async signUp(
     authDto: AuthDto,
   ): Promise<{ accessToken: string; externalId: string } | any> {
-    const auth = getAuth();
-
     const userCreated = await createUserWithEmailAndPassword(
-      auth,
+      this.auth,
       authDto.email,
       authDto.password,
     );
     sendEmailVerification(userCreated.user);
     const accessToken = (await userCreated.user.getIdTokenResult()).token;
+    const externalId = userCreated.user.uid;
 
     return {
       accessToken,
-      externalId: userCreated.user.uid,
+      externalId,
+    };
+  }
+
+  async signIn(authDto: AuthDto): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    externalId: string;
+  }> {
+    const userResponse = await signInWithEmailAndPassword(
+      this.auth,
+      authDto.email,
+      authDto.password,
+    );
+    const accessToken = (await userResponse.user.getIdTokenResult()).token;
+    const refreshToken = userResponse.user.refreshToken;
+    const externalId = userResponse.user.uid;
+
+    return {
+      accessToken,
+      refreshToken,
+      externalId,
     };
   }
 }

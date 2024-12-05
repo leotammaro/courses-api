@@ -7,24 +7,24 @@ on:
   push:
     branches: ['*']
 
-  env:
-    DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-    DB_NAME: ${{secrets.DB_NAME}}
-    DB_PORT: ${{secrets.DB_PORT}}
-    DB_USER: ${{secrets.DB_USER}}
-    DB_HOST: ${{secrets.DB_HOST}}
-    FIREBASE_API_KEY: mock
-    FIREBASE_AUTH_DOMAIN: mock
-    FIREBASE_PROJECT_ID: mock
-    FIREBASE_STORAGE_BUCKET: mock
-    FIREBASE_MESSAGING_SENDER_ID: mock
-    FIREBASE_APP_ID: mock
-    FIREBASE_MEASUREMENT_ID: mock
-
 jobs:
   run-tests:
     permissions: write-all
     runs-on: ubuntu-20.04
+
+    env:
+      DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+      DB_NAME: ${{secrets.DB_NAME}}
+      DB_PORT: ${{secrets.DB_PORT}}
+      DB_USER: ${{secrets.DB_USER}}
+      DB_HOST: ${{secrets.DB_HOST}}
+      FIREBASE_API_KEY: mock
+      FIREBASE_AUTH_DOMAIN: mock
+      FIREBASE_PROJECT_ID: mock
+      FIREBASE_STORAGE_BUCKET: mock
+      FIREBASE_MESSAGING_SENDER_ID: mock
+      FIREBASE_APP_ID: mock
+      FIREBASE_MEASUREMENT_ID: mock
 
     services:
       db:
@@ -33,7 +33,9 @@ jobs:
           MYSQL_ROOT_PASSWORD: ${{secrets.DB_PASSWORD}}
           MYSQL_DATABASE: ${{secrets.DB_NAME}}
         ports:
-          - ${{secrets.DB_PORT}}:3306
+          - 3306:3306
+        volumes:
+          - ./data/mysql/:/var/lib/mysql
 
     strategy:
       matrix:

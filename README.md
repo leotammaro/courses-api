@@ -74,9 +74,20 @@ This API enables course prioritization based on predefined dependencies and cour
 
 ```
 
-## Compile and run the project
+## Prerequisites:
 
--Copy `.env.dist`, create `.env` and paste
+- Node 18+
+- Docker desktop
+
+## Initialization
+
+- Run database container using `docker-compose up -d` or `docker compose up -d` depending on your operating system
+
+- `npm install` to install all necessary dependencies
+
+- Create `.env` and copy `.env.dist`
+
+## Compile and run the project
 
 ```bash
 # development
@@ -88,6 +99,12 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+## Migrations
+
+-When do some change on entities file, require run `name=${fileName }npm run migration:generate`
+-To generate empty migration `name={fileName} npm run migration:create`
+-To run migrations `npm run migration:run`
 
 ## Run tests
 

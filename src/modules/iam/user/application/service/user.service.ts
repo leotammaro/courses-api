@@ -24,7 +24,7 @@ export class UserService implements IUserService {
   async getOneByExternalIdOrFail(externalId: string): Promise<User> {
     const user = await this.userRepository.findByExternalId(externalId);
     if (!user) {
-      throw new NotFoundException('User doenst exist');
+      throw new NotFoundException('User doesnt exist');
     }
 
     return user;

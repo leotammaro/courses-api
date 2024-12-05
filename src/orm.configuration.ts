@@ -1,6 +1,5 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
-import { User } from './modules/iam/user/entity/user.entity';
 dotenv.config();
 
 enum ENVIRONMENT {
@@ -25,7 +24,7 @@ const development: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  synchronize: false,
+  synchronize: true,
 };
 
 export const datasourceOptions: DataSourceOptions = (() => {
@@ -41,6 +40,6 @@ export const datasourceOptions: DataSourceOptions = (() => {
 })();
 export default new DataSource({
   ...datasourceOptions,
-  entities: [User],
+  entities: ['./src/**/entity/*.entity.{ts,js}'],
   migrations: ['./data/migrations/*.ts'],
 });

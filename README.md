@@ -14,31 +14,31 @@ This API enables course prioritization based on predefined dependencies and cour
   "userId": "00000000-0000-0000-0000-000000000000",
   "courses": [
     {
-      "desiredCourse": "Finance",
-      "requiredCourse": "PortfolioTheories"
-    },
-    {
-      "desiredCourse": "Investment",
-      "requiredCourse": "InvestmentStyle"
-    },
-    {
       "desiredCourse": "InvestmentManagment",
-      "requiredCourse": "Investment"
+      "requiredCourse": "Investment",
     },
     {
-      "desiredCourse": "PortfolioTheories",
-      "requiredCourse": "InvestmentStyle"
-    },
-    {
-      "desiredCourse": "InvestmentStyle",
-      "requiredCourse": "InvestmentManagment"
+      "desiredCourse": "Finance",
+      "requiredCourse": "PortfolioTheories",
     },
     {
       "desiredCourse": "PortfolioConstruction",
-      "requiredCourse": "Investment"
-    }
-  ]
-}
+      "requiredCourse": "Investment",
+    },
+    {
+      "desiredCourse": "PortfolioTheories",
+      "requiredCourse": "InvestmentStyle",
+    },
+    {
+      "desiredCourse": "InvestmentStyle",
+      "requiredCourse": "InvestmentManagment",
+    },
+    {
+      "desiredCourse": "Investment",
+      "requiredCourse": "InvestmentStyle",
+    },
+  ],
+};
 ```
 
 ## Output EXPECTED
